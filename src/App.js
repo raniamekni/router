@@ -1,18 +1,20 @@
 import { useState } from "react";
 import "./App.css";
-
+import AddMovie from "./Components/AddMovie";
 import MainNavbar from "./Components/MainNavbar";
 import MovieList from "./Components/MovieList";
-
-
+import MovieDescription from "./Components/MovieDescription"
+import { BrowserRouter as Router,   Route, Switch} from "react-router-dom";
+ 
 function App() {
   const [movies, setMovies] = useState([
     {
-      id: Math.random(),
+      id: 1,
       img: "https://fr.web.img2.acsta.net/newsv7/20/04/22/10/01/2442322.jpg",
       name: "venom",
       description:"Action",
       rating: 4,
+      trailer:"https://www.youtube.com/watch?v=u9Mv98Gr5pY",
     },
     {
       id: Math.random(),
@@ -20,6 +22,7 @@ function App() {
       name: "Mr & Mrs smith",
       description:"Action",
       rating: 4,
+      trailer:"https://www.youtube.com/watch?v=CZ0B22z22pI",
     },
     {
       id: Math.random(),
@@ -27,13 +30,15 @@ function App() {
       name: "titanic",
       description:"drame romantique",
       rating: 4,
+      trailer:"https://www.youtube.com/watch?v=kVrqfYjkTdQ",
     },
     {
       id: Math.random(),
-      img: "https://m.media-amazon.com/images/I/81QmDT99wsL._SL1500_.jpg",
+      img: "https://fr.web.img6.acsta.net/pictures/21/10/21/15/41/2023058.jpg",
       name: "Red notice ",
       description:"Action",
       rating: 4,
+      trailer:"https://www.youtube.com/watch?v=Pj0wz7zu3Ms",
     },
     
     {
@@ -42,7 +47,10 @@ function App() {
       name: "la casa de papel",
       description:"Drame, Thriller, Braquage",
       rating: 4,
+      trailer:"https://www.youtube.com/watch?v=To_kVMMu-Ls",
+     
     },
+   
   ]);
   const [movieName, setmovieName] = useState("");
   const [rating, setRating] = useState(0);
@@ -69,10 +77,11 @@ function App() {
     }
   };
   // const handleAddMovie = (e) => {
-  //   setNewMovie({ ...NewMovie, [e.target.name]: e.target.value });
+   // setNewMovie({ ...NewMovie, [e.target.name]: e.target.value });
   // };
 
   return (
+   
     <div className="App">
       <MainNavbar
         movieName={movieName}
@@ -81,7 +90,17 @@ function App() {
         handleRating={handleRating}
         handelModal={handleModal}
       />
-      <MovieList movies={movies} movieName={movieName} rating={rating} />
+     <Switch>
+       <Route exact path="/">
+       <MovieList movies={movies} movieName={movieName} rating={rating} />
+       </Route>
+       <Route  path="/about/:id">
+       <MovieDescription  movies={movies}  />;
+       </Route>
+       <Route path="/">
+      <AddMovie/>
+      </Route>
+      </Switch>
       
     </div>
   );

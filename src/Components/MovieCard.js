@@ -1,4 +1,8 @@
 import ReactStars from "react-rating-stars-component";
+import {BrowserRouter as Router, Link} from "react-router-dom";
+
+
+
 
 const MovieCard = ({ filtredMovies }) => {
   console.log(filtredMovies)
@@ -17,10 +21,11 @@ const MovieCard = ({ filtredMovies }) => {
           <div
             key={movie.id}
           >
+            <Link to={`/about/${movie.id}`}>
             <img src={movie.img} width={200} height={250} />
             <h6> {movie.name} </h6>
             <p style={{fontSize:"12px"}}>{movie.description}</p>
-            
+            </Link>
           
             <ReactStars
               count={5}
